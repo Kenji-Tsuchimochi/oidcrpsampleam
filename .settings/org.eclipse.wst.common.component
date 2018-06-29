@@ -4,6 +4,6 @@
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <property name="java-output-path" value="/oidctest/build/classes"/>
-        <property name="context-root" value="oidcrpsample"/>
+        <property name="context-root" value="oidctest"/>
     </wb-module>
 </project-modules>
