@@ -8,6 +8,6 @@ public class OIDCConsts {
 	public static final String CLIENT_SECRET = "YOUR_APP_CLIENT_SECRET";
 	public static final String REDIRECT_URI = "/callback";
 	public static final String REDIRECT_SERVER = "http://localhost:8080";
-	public static final String ISSUER_URL = "https://auth.login.yahoo.co.jp/yconnect/v2";
+	public static final String ISSUER_URL = "https://openam.ipdev.themi-psone.net/openam/oauth2";
 	public static final String USER_INFO_API_URL = "https://openam.ipdev.themi-psone.net/openam/oauth2/.well-known/openid-configuration";
 }
