@@ -26,7 +26,7 @@ public class OIDCUtil {
 		return Base64.encodeBase64URLSafeString(hashedbyteshalf);
 	}
 
-	public static PublicKey getYConnectPublicKey(String kid) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
+	public static PublicKey getJwkPublicKey(String kid) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
 		//Public Key エンドポイントにアクセス
 		URL url = new URL(OIDCConsts.PUBKEY_URL);
 		HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
@@ -36,17 +36,8 @@ public class OIDCUtil {
 			JsonParser parser = new JsonParser();
 			JsonObject obj = parser.parse(new InputStreamReader(conn.getInputStream())).getAsJsonObject();
 
-			//公開鍵文字列を取得する
-			String pubkeystr = obj.get(kid).getAsString();
-
-			KeyFactory kf = KeyFactory.getInstance("RSA");
-
-			//公開鍵文字列に含まれる余分な文字列を削除する
-			pubkeystr = pubkeystr.replaceAll("\\n", "").replace("-----BEGIN PUBLIC KEY-----", "").replace("-----END PUBLIC KEY-----", "");
-
-			//PublicKeyインスタンスを生成する
-	        X509EncodedKeySpec keySpecX509 = new X509EncodedKeySpec(Base64.decodeBase64(pubkeystr));
-	        PublicKey pubKey = (PublicKey) kf.generatePublic(keySpecX509);
+			OIDCJwk jwk = new OIDCJwk(obj);
+			PublicKey pubKey = jwk.getKey(jwk.getKidArray()[0]);
 
 	        return pubKey;
 		}
@@ -79,7 +70,7 @@ public class OIDCUtil {
 
 	public static void main(String[] args) {
 		try {
-			OIDCUtil.getYConnectPublicKey("0cc175b9c0f1b6a831c399e269772661");
+			OIDCUtil.getJwkPublicKey("0cc175b9c0f1b6a831c399e269772661");
 		}
 		catch(Exception e) {
 			e.printStackTrace();

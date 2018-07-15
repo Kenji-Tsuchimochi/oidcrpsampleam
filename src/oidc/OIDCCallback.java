@@ -82,7 +82,7 @@ public class OIDCCallback extends HttpServlet {
 		IdToken idToken = IdToken.parse(idtokenres.getFactory(), idtokenres.getIdToken());
 		try {
 			//IDトークンの署名を検証する
-			if( ! idToken.verifySignature(OIDCUtil.getYConnectPublicKey(idToken.getHeader().getKeyId()))) {
+			if( ! idToken.verifySignature(OIDCUtil.getJwkPublicKey(idToken.getHeader().getKeyId()))) {
 				res.sendError(HttpServletResponse.SC_FORBIDDEN,"Invalid signature");
 				return;
 			}

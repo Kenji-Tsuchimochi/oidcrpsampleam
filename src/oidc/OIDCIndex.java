@@ -48,7 +48,7 @@ public class OIDCIndex extends HttpServlet {
 		pw.println("<title>OpenID Connect RPサンプル</title>");
 		pw.println("</head>");
 		pw.println("<body>");
-		pw.println("<a href=\"" + req.getContextPath() + "/start" + "\">Yahoo! ID連携 で認証</a>");
+		pw.println("<a href=\"" + req.getContextPath() + "/start" + "\">OpenAM連携 で認証</a>");
 		pw.println("</body>");
 		pw.println("</html>");
 		pw.flush();
