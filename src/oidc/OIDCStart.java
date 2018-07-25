@@ -48,7 +48,7 @@ public class OIDCStart extends HttpServlet {
 				url.set("nonce", nonce);
 
 				//redirect_uriパラメータを設定
-				GenericUrl redirectUri = new GenericUrl("http://localhost:8080" + req.getContextPath());
+				GenericUrl redirectUri = new GenericUrl(OIDCConsts.REDIRECT_SERVER + req.getContextPath());
 				redirectUri.appendRawPath(OIDCConsts.REDIRECT_URI);
 				url.setRedirectUri(redirectUri.build());
 
